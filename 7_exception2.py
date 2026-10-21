@@ -10,15 +10,21 @@
 * Первые два нужно приводить к вещественному числу при помощи float(),
   а третий - к целому при помощи int() и перехватывать исключения
   ValueError и TypeError, если приведение типов не сработало.
-    
+
 """
 
-def discounted(price, discount, max_discount=20)
-    """
-    Замените pass на ваш код
-    """
-    pass
-    
+
+def discounted(price, discount, max_discount=20):
+    try:
+        price = float(price)
+        discount = float(discount)
+        max_discount = int(max_discount)
+        return price - (price*discount/100)
+    except ValueError:
+        print("Значение не подходит типу переменной. Напишите число а не строку")
+    except TypeError:
+        print("Тип переменной не подходит функции, измени тип данных")
+
 if __name__ == "__main__":
     print(discounted(100, 2))
     print(discounted(100, "3"))
