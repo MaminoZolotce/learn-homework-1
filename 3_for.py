@@ -6,7 +6,7 @@
 
 * Дан список словарей с данными по колличеству проданных телефонов
   [
-    {'product': 'iPhone 12', 'items_sold': [363, 500, 224, 358, 480, 476, 470, 216, 270, 388, 312, 186]}, 
+    {'product': 'iPhone 12', 'items_sold': [363, 500, 224, 358, 480, 476, 470, 216, 270, 388, 312, 186]},
     {'product': 'Xiaomi Mi11', 'items_sold': [317, 267, 290, 431, 211, 354, 276, 526, 141, 453, 510, 316]},
     {'product': 'Samsung Galaxy 21', 'items_sold': [343, 390, 238, 437, 214, 494, 441, 518, 212, 288, 272, 247]},
   ]
@@ -15,13 +15,32 @@
 * Посчитать и вывести суммарное количество продаж всех товаров
 * Посчитать и вывести среднее количество продаж всех товаров
 """
+from typing import TypedDict
 
-def main():
-    """
-    Эта функция вызывается автоматически при запуске скрипта в консоли
-    В ней надо заменить pass на ваш код
-    """
-    pass
-    
+class Product(TypedDict):
+    product: str
+    items_sold: list[int]
+
+def main(product:list[Product]):
+    sum_total = 0
+    num_of_product = 0
+    for item in product:
+        arr = item.get('items_sold')
+        total = sum(arr)
+        avg = total / len(arr)
+        sum_total+=total
+        num_of_product+=len(arr)
+        print(f'{item.get('product')}: {total} \n avg: {avg:.2f}')
+    print(f' Total sales: {sum_total}, Avg sales: {sum_total / num_of_product}')
+
+
+
+
+
 if __name__ == "__main__":
-    main()
+
+    products = [{'product': 'iPhone 12', 'items_sold': [363, 500, 224, 358, 480, 476, 470, 216, 270, 388, 312, 186]},
+        {'product': 'Xiaomi Mi11', 'items_sold': [317, 267, 290, 431, 211, 354, 276, 526, 141, 453, 510, 316]},
+        {'product': 'Samsung Galaxy 21', 'items_sold': [343, 390, 238, 437, 214, 494, 441, 518, 212, 288, 272, 247]}
+        ]
+    main(products)
